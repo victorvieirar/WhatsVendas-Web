@@ -1,28 +1,36 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  #app(ref="app")
+    img.logo(src="./assets/logo.white.png")
+    CreateOrder    
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { CreateOrder } from "./components/";
+import { APIService } from "./services/APIService";
+
+const apiService = new APIService();
 
 export default {
-  name: 'app',
+  name: "App",
+  data() {
+    return {
+      order: {}
+    };
+  },
   components: {
-    HelloWorld
+    CreateOrder
+  },
+  methods: {
+    createOrder(order) {
+      apiService
+        .createOrder(order.name, order.phone, order.address, order.price)
+        .then(data => {
+          this.order = data.data;
+          alert("Pedido cadastrado!");
+        });
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style src="./app.sass" lang="sass"></style>

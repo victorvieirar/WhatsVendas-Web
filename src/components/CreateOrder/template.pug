@@ -1,0 +1,16 @@
+.container
+  form
+    .inputGroup
+      input#name(type="text" placeholder=" " v-model="order.name")
+      label(for="name") Nome
+    .inputGroup
+      the-mask#phone(mask="(##) #####-####" v-model="order.phone" type="text" masked="false" placeholder=" ")
+      label(for="phone") Telefone
+    .inputGroup
+      input#address(type="text" placeholder=" " v-model="order.address")
+      label(for="address") Endereço
+    .inputGroup
+      money(v-model="order.price" v-bind="money" placeholder=" ")
+      label(for="value") Valor
+    button(type="button" @click="create") Criar
+    button(type="reset") Resetar 

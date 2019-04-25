@@ -1,0 +1,36 @@
+@import 'animations'
+@import 'colors'
+
+=transition($timing, $timing-function)
+  transition: $timing $timing-function
+  -moz-transition: $timing $timing-function
+  -webkit-transition: $timing $timing-function
+
+=box-shadow($horizontal, $vertical, $blur, $spread, $color)
+  -webkit-box-shadow: $horizontal $vertical $blur $spread $color
+  -moz-box-shadow: $horizontal $vertical $blur $spread $color
+  box-shadow: $horizontal $vertical $blur $spread $color
+
+=card
+  padding: 30px
+  border-radius: 5px
+  background-color: $white
+  +box-shadow(0px, 2.5px, 5px, 0px, rgba(0,0,0,0.25))
+
+=slideRight
+  animation: .3s ease forwards slideToRight
+
+=slideDown
+  animation: .3s ease forwards slideToDown
+
+=scaleUp
+  animation: .1s ease forwards scaleUp
+
+=rotate
+  animation: .75s ease rotate
+
+=no-select
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none

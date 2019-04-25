@@ -1,0 +1,75 @@
+@import "../../styles/colors"
+@import "../../styles/mixins"
+  
+.container
+  display: flex
+  flex-direction: column
+  width: 100%
+  align-items: center
+  justify-content: center
+
+  form
+    display: flex
+    flex-direction: column
+    width: 40%  
+
+    .inputGroup
+      display: flex
+      flex-direction: column-reverse
+
+      label
+        position: relative
+        top: -5px
+        left: 20px
+        font-size: .8rem
+        text-transform: uppercase     
+        color: $red   
+        +transition(.1s, ease)
+
+      input
+        padding: 0 20px
+        height: 40px
+        color: $red
+        border: 1px solid $white
+        border-radius: 20px
+        background-color: $white
+        font-family: "Montserrat"
+        +box-shadow(0px, 2.5px, 5px, 0px, rgba(0,0,0,0.25))
+
+      input:focus,
+      input:hover
+        outline: none
+
+      input:focus ~ label,
+      input:hover ~ label
+        top: -5px
+        color: $white
+        +transition(.1s, ease)
+        margin: 15px 0 5px 0
+
+      :placeholder-shown ~ label
+        top: 29px
+
+      input:not(:placeholder-shown) ~ label 
+        margin: 15px 0 5px 0
+        color: $white
+
+
+    button
+      height: 40px
+      margin: 10px 0 0 0 
+      border: none
+      border-radius: 20px
+      background-color: $darkRed
+      color: $white
+      text-transform: uppercase
+      cursor: pointer
+      +box-shadow(0px, 2.5px, 5px, 0px, rgba(0,0,0,0.25))
+
+    button:hover,
+    button:focus
+      outline: none
+      background-color: $white
+      color: $red
+
+    

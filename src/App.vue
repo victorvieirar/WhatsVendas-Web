@@ -2,11 +2,10 @@
   #app(ref="app")
     img.logo(src="./assets/logo.white.png")
     CreateOrder    
-    OrderView(ref="view")
 </template>
 
 <script>
-import { CreateOrder, OrderView } from "./components/";
+import { CreateOrder } from "./components/";
 import { APIService } from "./services/APIService";
 
 import jsPDF from "jspdf";
@@ -21,8 +20,7 @@ export default {
     };
   },
   components: {
-    CreateOrder,
-    OrderView
+    CreateOrder
   },
   methods: {
     createOrder(order) {
@@ -30,20 +28,24 @@ export default {
         .createOrder(order.name, order.phone, order.address, order.price)
         .then(data => {
           this.order = data.data;
-          this.$refs.view.order = this.order;
+          this.order.price = `R$ ${this.order.price}`;
           alert("Pedido cadastrado!");
-          this.generateFromHTML();
+          this.generatePDF();
         });
     },
-    generateFromHTML() {
-      const el = this.$refs.view;
-      let doc = new jsPDF();
-      doc.fromHTML(
-        el, // HTML string or DOM elem ref.
-        10, // x coord
-        10
-      );
-      doc.save(`${this.order.name}_compra.pdf`);
+    generatePDF() {
+      let doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: [80, 80]
+      });
+      doc.setFontSize(4);
+      doc.text(this.order.name, 4, 7);
+      doc.text(this.order.phone, 4, 10);
+      doc.text(this.order.address, 4, 13);
+      doc.text(this.order.price, 4, 16);
+
+      doc.save(`${this.order.name}_Compra.pdf`);
     }
   }
 };
